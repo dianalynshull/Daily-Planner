@@ -9,6 +9,10 @@ let bsTextArea;
 let bsInputGroupAppend;
 let bsSubmitButton;
 let amPm = "";
+let timeSlotI;
+let currentHour;
+let timeSlotStandard;
+let btnID;
 let plannerLocalStorage;
 let currentDay = moment().format("dddd MMM Do YYYY");
 
@@ -16,18 +20,18 @@ plannerInput();
 
 function plannerInput() {
     for (let i = 0; i < timeSlots.length; i++) {
-        let timeSlotI = timeSlots[i];
-        let currentHour = moment().format("H");
-        console.log(currentHour);
-        let timeSlotStandard = moment(timeSlotI, "H").format("h");
-        // Variables to create planner elements
+        // definining variable values inside of function
+        timeSlotI = timeSlots[i];
+        currentHour = moment().format("H");
+        timeSlotStandard = moment(timeSlotI, "H").format("h");
+        btnID = "save-btn-" + timeSlotStandard;
         plannerTimeSlot = $("<form>");
         bsInputGroup = $("<div>").addClass("input-group flex-nowrap");
         bsInputGroupPrepend = $("<div>").addClass("input-group-prepend");
         bsInputGroupText = $("<span>").addClass("input-group-text addon-wrapping");
-        bsTextArea = $("<textarea>").addClass("form-control").attr("id",  "text-area-" + timeSlotStandard);
+        bsTextArea = $("<textarea>").addClass("form-control").attr("id",  btnID);
         bsInputGroupAppend = $("<div>").addClass("input-group-append");
-        bsSubmitButton = $("<button>").addClass("btn btn-outline-secondary button-addon2").attr("type", "button").attr("id", "save-btn-" + timeSlotStandard);
+        bsSubmitButton = $("<button>").addClass("btn btn-outline-secondary button-addon2").attr("type", "button").attr("id", btnID);
         
         // defines if the timeslot is am or pm
         if (timeSlotI >= 9 && timeSlotI < 12) {
@@ -63,8 +67,14 @@ function plannerInput() {
             bsTextArea.addClass("present");
         } else {
             bsTextArea.addClass("future");
-        }  
+        } 
     }
+    $(".btn").on("click", function(event) {
+        event.preventDefault();
+        let userInput = this.parentElement.parentElement.children[1].value;
+        let userInputId = this.parentElement.parentElement.children[1].id;
+        localStorage.setItem("" + userInputId + "", userInput);
+    });
 }
 
 
