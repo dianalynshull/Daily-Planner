@@ -1,5 +1,5 @@
 // when text is typed into the time spot it is saved in local storage
-const timeSlots = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
+const timeSlots = ["09", "10", "11", "12", "13", "14", "15", "16", "17"];
 
 let plannerTimeSlot;
 let bsInputGroup;
@@ -11,18 +11,15 @@ let bsSubmitButton;
 let amPm = "";
 let plannerLocalStorage;
 let currentDay = moment().format("dddd MMM Do YYYY");
-let currentHour = moment().format("H")
-console.log(currentHour);
 
 plannerInput();
 
 function plannerInput() {
     for (let i = 0; i < timeSlots.length; i++) {
-        if (currentHour > timeSlots[i]) {
-            bsTextArea.addClass("past");
-        };
-        let timeSlotStandard = moment(timeSlots[i], "H").format("h");
-        console.log(timeSlotStandard);
+        let timeSlotI = timeSlots[i];
+        let currentHour = moment().format("H");
+        console.log(currentHour);
+        let timeSlotStandard = moment(timeSlotI, "H").format("h");
         // Variables to create planner elements
         plannerTimeSlot = $("<form>");
         bsInputGroup = $("<div>").addClass("input-group flex-nowrap");
@@ -33,15 +30,13 @@ function plannerInput() {
         bsSubmitButton = $("<button>").addClass("btn btn-outline-secondary button-addon2").attr("type", "button").attr("id", "save-btn-" + timeSlotStandard);
         
         // defines if the timeslot is am or pm
-        if (timeSlots[i] >= 9 && timeSlots[i] < 12) {
+        if (timeSlotI >= 9 && timeSlotI < 12) {
             amPm = " AM";
             bsInputGroupText.text(timeSlotStandard + amPm);
         } else {
             amPm = " PM";
             bsInputGroupText.text(timeSlotStandard + amPm);
         }
-
-        //defines color of planner element background
         
         // adding text content to planner
         bsSubmitButton.html("<i class='far fa-save'>");
@@ -58,7 +53,17 @@ function plannerInput() {
         
         //style planner
         $(".addon-wrapping").width("50px");
-        
+
+        //defines color of planner element background
+        if (currentHour > timeSlotI) {
+            console.log("current hour " + currentHour);
+            console.log("timeslots " + timeSlotI);
+            bsTextArea.addClass("past");
+        } else if (currentHour === timeSlotI) {
+            bsTextArea.addClass("present");
+        } else {
+            bsTextArea.addClass("future");
+        }  
     }
 }
 
