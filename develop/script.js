@@ -8,19 +8,8 @@ let bsInputGroupText;
 let bsTextArea;
 let bsInputGroupAppend;
 let bsSubmitButton;
-
-
-
 let amPm = "";
-
-// let plannerStorage = localStorage.getItem();
-
-//     if (nineAmSlot.textContent = null) {
-//         return;
-//     }
-//     else {
-//         nineAmSlot.append(plannerItem);
-//     }
+let faSaveImg = 'i class="far fa-save"';
 
 plannerInput();
 
@@ -44,12 +33,15 @@ function plannerInput() {
             bsInputGroupText.textContent = timeSlots[i] + amPm;
         }
         
-        bsInputGroupText.textContent = timeSlots[i] + amPm;
-        bsTextArea.textContent = "test";
-        bsSubmitButton.textContent = "<i class='far fa-save'></i>";
+        // adding text content to planner
+        bsInputGroupText.text(timeSlots[i] + amPm);
+        bsTextArea.text("test");
+        bsSubmitButton.text("<" + faSaveImg + ">");
+
+        
 
 
-        $("#container").prepend(plannerTimeSlot);
+        $("#container").append(plannerTimeSlot);
         plannerTimeSlot.append(bsInputGroup);
         bsInputGroup.append(bsInputGroupPrepend);
         bsInputGroup.append(bsTextArea);
@@ -62,15 +54,10 @@ function plannerInput() {
         console.dir(bsTextArea.textContent);
         console.dir(bsSubmitButton.textContent);
 
+        //style planner
+        $(".addon-wrapping").width("50px");
+
     }
 }
 
-//     
-   
-// } 
-
-// $("#save").on("click", function() {
-//     event.preventDefault();
-//     let plannerItem = nineAmSlot.val();
-//     localStorage.setItem("nineAmItem", plannerItem);
     
