@@ -41,18 +41,16 @@ function plannerInput() {
 		bsSubmitButton.html("<i class='far fa-save'>");
 		$("#currentDay").text(currentDay);
 		$("#container").append(plannerTimeSlot);
-        //appending planner elements
-        plannerTimeSlot.append(bsInputGroup);
+		//appending planner elements
+		plannerTimeSlot.append(bsInputGroup);
 		bsInputGroup.append(bsInputGroupPrepend);
 		bsInputGroup.append(bsTextArea);
 		bsInputGroup.append(bsInputGroupAppend);
 		bsInputGroupPrepend.append(bsInputGroupText);
 		bsInputGroupAppend.append(bsSubmitButton);
-        
-        // planner style
-        $(".addon-wrapping").width("50px");
-        $(".btn").width("20px");
-        
+		// planner style
+		$(".addon-wrapping").width("50px");
+		$(".btn").width("20px");
 		//defines color of planner element background
 		if(currentHour > timeSlotI) {
 			bsTextArea.addClass("past");
